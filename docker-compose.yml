@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  sqlserver:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    environment:
+      - ACCEPT_AULA=Y
+      - SA_PASSWORD=root
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    networks:
+      - app-network
+volumes:
+  sqlserver-data:
+networks:
+  app-network:
+    driver: bridge
