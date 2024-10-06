@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StudentsMustHaveServer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+69cd0edba3167044e6834295bfffdf0b4e1d236a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e05aa090131d8975c7b81237923ceb298680835c")]
 [assembly: System.Reflection.AssemblyProductAttribute("StudentsMustHaveServer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StudentsMustHaveServer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
