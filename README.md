@@ -4,7 +4,7 @@
 
 ```
 # run the docker container with mssql
-docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=root" \
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=root@1898989!x" \
     -p 1433:1433 --name students_mssql \
     --platform linux/amd64 \
     -v sqlserver-data:/var/opt/mssql \
