@@ -4,9 +4,6 @@
 
 ```
 # run the docker container with mssql
-docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=root@1898989!x" \
-    -p 1433:1433 --name students_mssql \
-    --platform linux/amd64 \
-    -v sqlserver-data:/var/opt/mssql \
-    -d mcr.microsoft.com/mssql/server:2022-latest
+docker pull mcr.microsoft.com/azure-sql-edge
+docker run -e "ACCEPT_EULA=1" -e "MSSQL_SA_PASSWORD=reallyStrongPwd123" -e "MSSQL_PID=Developer" -e "MSSQL_USER=SA" -p 1433:1433 -d --name=students_mssql mcr.microsoft.com/azure-sql-edge
 ```
