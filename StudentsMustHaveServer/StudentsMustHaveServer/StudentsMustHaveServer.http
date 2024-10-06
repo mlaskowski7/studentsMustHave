@@ -1,6 +1,0 @@
-@StudentsMustHaveServer_HostAddress = http://localhost:5056
-
-GET {{StudentsMustHaveServer_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
