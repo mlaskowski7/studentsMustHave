@@ -56,5 +56,50 @@ namespace StudentsMustHaveServer.Tests.Repositories
         {
             Assert.ThrowsAsync<ArgumentException>(() => studentRepository.GetByIdAsync(5));
         }
+
+        [Test]
+        public async Task GetAllAsyncReturnsAllStudents()
+        {
+            var result = await studentRepository.GetAllAsync();
+
+            Assert.That(result.Count(), Is.EqualTo(4));
+            Assert.That(result.ElementAt(0), Is.EqualTo(new Student { Id = 1, Username = "user1", Password = "pswd1" }));
+            Assert.That(result.ElementAt(1), Is.EqualTo(new Student { Id = 2, Username = "user2", Password = "pswd2" }));
+            Assert.That(result.ElementAt(2), Is.EqualTo(new Student { Id = 3, Username = "user3", Password = "pswd3" }));
+            Assert.That(result.ElementAt(3), Is.EqualTo(new Student { Id = 4, Username = "user4", Password = "pswd4" }));
+        }
+
+        [Test]
+        public async Task AddAsyncAddsStudent()
+        {
+            await studentRepository.AddAsync(new Student { Id = 5, Username = "user5", Password = "pswd5" });
+
+            var result = await studentRepository.GetByIdAsync(5);
+            Assert.That(result, Is.EqualTo(new Student { Id = 5, Username = "user5", Password = "pswd5" }));
+        }
+
+        [Test]
+        public async Task UpdateChangesStudent()
+        {
+            var student = await studentRepository.GetByIdAsync(4);
+            student.Username = "user5";
+            student.Password = "pswd5";
+
+            await studentRepository.UpdateAsync(student);
+            var result = await studentRepository.GetByIdAsync(4);
+
+            Assert.IsNotNull(result);
+            Assert.That(result, Is.EqualTo(new Student { Id = 4, Username = "user5", Password = "pswd5" }));
+        }
+
+        [Test]
+        public async Task DeleteRemovesStudent()
+        {
+            var student = await studentRepository.GetByIdAsync(4);
+
+            await studentRepository.DeleteAsync(student);
+
+            Assert.ThrowsAsync<ArgumentException>(() => studentRepository.GetByIdAsync(5));
+        }
     }
 }
