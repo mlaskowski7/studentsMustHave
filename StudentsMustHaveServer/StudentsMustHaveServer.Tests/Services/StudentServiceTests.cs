@@ -61,5 +61,38 @@ namespace StudentsMustHaveServer.Tests.Services
         {
             Assert.ThrowsAsync<ArgumentException>(() => studentService.LoginStudentAsync("user9021312", "pswd4"));
         }
+
+        [Test]
+        public async Task RegisterStudentAsyncValidReturnsTrue()
+        {
+            bool result = await studentService.RegisterNewStudentAsync("user10", "pswd10");
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void RegisterStudentAsyncTakenUsernameThrowsArgumentException()
+        {
+            Assert.ThrowsAsync<ArgumentException>(() => studentService.RegisterNewStudentAsync("user1", "pswd4"));
+        }
+
+        [Test]
+        public async Task DeleteAccountValidReturnsTrue()
+        {
+            var result = await studentService.DeleteAccountAsync("user3", "pswd3");
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void DeleteAccountInvalidUserThrowsArgumentException()
+        {
+            Assert.ThrowsAsync<ArgumentException>(() => studentService.DeleteAccountAsync("user9", "pswd4"));
+        }
+
+        [Test]
+        public async Task DeleteAccountInvalidPswdReturnsFalse()
+        {
+            var result = await studentService.DeleteAccountAsync("user3", "pswd4");
+            Assert.IsFalse(result);
+        }
     }
 }

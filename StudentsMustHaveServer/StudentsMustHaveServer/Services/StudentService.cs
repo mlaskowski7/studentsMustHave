@@ -17,8 +17,8 @@ namespace StudentsMustHaveServer.Services
         public async Task<bool> DeleteAccountAsync(string username, string password)
         {
             Student? student = await studentRepository.GetByUsernameAsync(username);
-            if (student == null) return false;
-            if (BCrypt.Net.BCrypt.Verify(password, student.Password)) return false;
+            if (student == null) throw new ArgumentException("student with this username doesnt exist in db");
+            if (!BCrypt.Net.BCrypt.Verify(password, student.Password)) return false;
             await studentRepository.DeleteAsync(student);
             return true;
         }
