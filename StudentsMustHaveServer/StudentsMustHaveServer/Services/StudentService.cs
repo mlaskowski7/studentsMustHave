@@ -14,25 +14,47 @@ namespace StudentsMustHaveServer.Services
             this.studentRepository = new StudentRepository(context);
         }
 
-        public Task<bool> DeleteAccountAsync(string username, string password)
+        public async Task<bool> DeleteAccountAsync(string username, string password)
         {
-            throw new NotImplementedException();
+            Student? student = await studentRepository.GetByUsernameAsync(username);
+            if (student == null) return false;
+            if (BCrypt.Net.BCrypt.Verify(password, student.Password)) return false;
+            await studentRepository.DeleteAsync(student);
+            return true;
         }
 
-        public Task<IEnumerable<Student>> GetAllStudentsAsync()
+        public async Task<IEnumerable<Student>> GetAllStudentsAsync()
         {
-            throw new NotImplementedException();
+            return await studentRepository.GetAllAsync();
         }
 
-        public Task<bool> LoginStudentAsync(string username, string password)
+        public async Task<bool> LoginStudentAsync(string username, string password)
         {
-            throw new NotImplementedException();
+            Student? student = await studentRepository.GetByUsernameAsync(username);
+
+            if (student == null) throw new ArgumentException("student with this username doesnt exist in db");
+
+            bool isValid = BCrypt.Net.BCrypt.Verify(password, student.Password);
+            return isValid;
         }
 
         public async Task<bool> RegisterNewStudentAsync(string username, string password)
         {
-            //if (await studentRepository.get)
-            return false;
+            if ((await studentRepository.GetByUsernameAsync(username)) != null)
+            {
+                throw new ArgumentException("username is already taken");
+            }
+
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+
+            Student student = new Student
+            {
+                Username = username,
+                Password = hashedPassword
+            };
+
+            await studentRepository.AddAsync(student);
+            return true;
         }
     }
 }
