@@ -8,13 +8,13 @@ public class ProjectTech
     [Key, Column("Project_ID")]
     public int ProjectId { get; set; }
     
-    [ForeignKey("Project_ID")]
+    [ForeignKey(nameof(ProjectId))]
     public Project Project { get; set; }
     
     [Key, Column("Tech_ID")]
     public int TechId { get; set; }
     
-    [ForeignKey("Tech_ID")]
+    [ForeignKey(nameof(TechId))]
     public Tech Tech { get; set; }
     
 }

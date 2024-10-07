@@ -16,14 +16,14 @@ public class Skill
     public string Level { get; set; }
     
     [Column("Tech_ID")]
-    public int Tech_Id { get; set; }
+    public int TechId { get; set; }
     
-    [ForeignKey("Tech_ID")]
+    [ForeignKey(nameof(TechId))]
     public Tech Tech { get; set; }
     
     [Column("Student_ID")]
-    public int Student_Id { get; set; }
+    public int StudentId { get; set; }
     
-    [ForeignKey("Student_ID")]
+    [ForeignKey(nameof(StudentId))]
     public Student Student { get; set; }
 }

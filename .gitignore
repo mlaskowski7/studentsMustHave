@@ -3,3 +3,5 @@ obj/
 .idea/
 .DS_Store
 node_modules/
+migrations/
+.vs/

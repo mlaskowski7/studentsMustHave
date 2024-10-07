@@ -24,7 +24,7 @@ public class Project
     [Column("Student_ID")]
     public int StudentId { get; set; }
     
-    [ForeignKey("Student_ID")]
+    [ForeignKey(nameof(StudentId))]
     public Student Student { get; set; }
     
     public ICollection<ProjectTech> ProjectTechs { get; set; }

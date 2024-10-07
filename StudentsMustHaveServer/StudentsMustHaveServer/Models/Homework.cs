@@ -20,14 +20,14 @@ public class Homework
     public string Description { get; set; }
     
     [Column("Student_ID")]
-    public int Student_Id { get; set; }
+    public int StudentId { get; set; }
     
-    [ForeignKey("Student_ID")]
+    [ForeignKey(nameof(StudentId))]
     public Student Student { get; set; }
     
     [Column("Subject_ID")]
-    public int Subject_Id { get; set; }
+    public int SubjectId { get; set; }
     
-    [ForeignKey("Subject_ID")]
+    [ForeignKey(nameof(SubjectId))]
     public Subject Subject { get; set; }
 }
