@@ -1,13 +1,14 @@
 ﻿using StudentsMustHaveServer.Data;
 using StudentsMustHaveServer.Models;
 using StudentsMustHaveServer.Repositories;
+using StudentsMustHaveServer.Repositories.Interfaces;
 using StudentsMustHaveServer.Services.Interfaces;
 
 namespace StudentsMustHaveServer.Services
 {
     public class StudentService : IStudentService
     {
-        private readonly StudentRepository studentRepository;
+        private readonly IStudentRepository studentRepository;
 
         public StudentService(StudentsDbContext context)
         {
