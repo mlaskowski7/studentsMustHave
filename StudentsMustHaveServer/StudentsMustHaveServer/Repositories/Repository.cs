@@ -18,7 +18,7 @@ namespace StudentsMustHaveServer.Repositories
             await context.Set<T>().AddAsync(entity);
         }
 
-        public void DeleteAsync(T entity)
+        public void Delete(T entity)
         {
             context.Set<T>().Remove(entity);
         }
@@ -44,11 +44,10 @@ namespace StudentsMustHaveServer.Repositories
             return await context.SaveChangesAsync() > 0;
         }
 
-        public void UpdateAsync(T entity)
+        public void Update(T entity)
         {
             context.Set<T>().Update(entity);
         }
     }
-    {
-    }
+    
 }

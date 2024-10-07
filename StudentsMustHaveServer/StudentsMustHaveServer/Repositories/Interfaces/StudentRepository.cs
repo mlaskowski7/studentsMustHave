@@ -2,7 +2,7 @@
 
 namespace StudentsMustHaveServer.Repositories.Interfaces
 {
-    public interface StudentRepository : IRepository<Student>
+    public interface IStudentRepository : IRepository<Student>
     {
     }
 }

@@ -22,5 +22,22 @@ public class Student
     public ICollection<Homework> Homeworks { get; set; }
     public ICollection<Project> Projects { get; set; }
     public ICollection<Skill> Skills { get; set; }
-    
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is Student other)
+        {
+            return this.Id == other.Id &&
+                this.Username == other.Username &&
+                this.Password == other.Password;
+        }
+
+        return false;
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Id, Username, Password);
+    }
+
 }

@@ -1,0 +1,60 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Moq;
+using StudentsMustHaveServer.Data;
+using StudentsMustHaveServer.Models;
+using StudentsMustHaveServer.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace StudentsMustHaveServer.Tests.Repositories
+{
+    [TestFixture]
+    public class StudentRepositoryTests
+    {
+        private StudentsDbContext context;
+        private StudentRepository studentRepository;
+
+        [SetUp]
+        public void Setup()
+        {
+            var options = new DbContextOptionsBuilder<StudentsDbContext>().UseInMemoryDatabase(databaseName: "TestDB").Options;
+            context = new StudentsDbContext(options);
+            studentRepository = new StudentRepository(context);
+
+            // insert some example data
+            context.Students.AddRange(new List<Student>
+            {
+                new Student { Id = 1, Username = "user1", Password = "pswd1"},
+                new Student { Id = 2, Username = "user2", Password = "pswd2"},
+                new Student { Id = 3, Username = "user3", Password = "pswd3"},
+                new Student { Id = 4, Username = "user4", Password = "pswd4"}
+            });
+            context.SaveChanges();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            context.Database.EnsureDeleted();
+            context.Dispose();
+        }
+
+        [Test]
+        public async Task GetByIdAsyncValidReturnsStudent()
+        {
+            var result = await studentRepository.GetByIdAsync(1);
+
+            Assert.IsNotNull(result);
+            Assert.That(result, Is.EqualTo(new Student { Id = 1, Username = "user1", Password = "pswd1" }));
+        }
+
+        [Test]
+        public void GetByIdAsyncInvalidThrowsException()
+        {
+            Assert.ThrowsAsync<ArgumentException>(() => studentRepository.GetByIdAsync(5));
+        }
+    }
+}
