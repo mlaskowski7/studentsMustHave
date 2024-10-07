@@ -58,6 +58,23 @@ namespace StudentsMustHaveServer.Tests.Repositories
         }
 
         [Test]
+        public async Task GetByUsernameAsyncValidReturnsStudent()
+        {
+            var result = await studentRepository.GetByUsernameAsync("user1");
+
+            Assert.IsNotNull(result);
+            Assert.That(result, Is.EqualTo(new Student { Id = 1, Username = "user1", Password = "pswd1" }));
+        }
+
+        [Test]
+        public async Task GetByUsernameAsyncInvalidReturnsNull()
+        {
+            var result = await studentRepository.GetByUsernameAsync("user12132132");
+
+            Assert.IsNull(result);
+        }
+
+        [Test]
         public async Task GetAllAsyncReturnsAllStudents()
         {
             var result = await studentRepository.GetAllAsync();
