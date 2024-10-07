@@ -1,6 +1,8 @@
-﻿namespace StudentsMustHaveServer.Repositories.Interfaces
+﻿using StudentsMustHaveServer.Models;
+
+namespace StudentsMustHaveServer.Repositories.Interfaces
 {
-    public interface StudentRepository
+    public interface StudentRepository : IRepository<Student>
     {
     }
 }
