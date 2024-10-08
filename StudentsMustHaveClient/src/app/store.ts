@@ -1,7 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-
+import studentReducer from "../features/student/studentSlice";
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    student: studentReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
